@@ -19,52 +19,58 @@ export default function VerticalJourney() {
   const itemsRef = useRef([]);
 
   useGSAP(() => {
-    const itemsHeight = rightColumnRef.current.clientHeight;
-    // We want to scroll such that the last item stops in the frame center (roughly 400px fixed height view)
-    const scrollDistance = itemsHeight - 400; 
+    let mm = gsap.matchMedia();
 
-    gsap.to(rightColumnRef.current, {
-      y: -scrollDistance,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: `+=${itemsHeight}`,
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        snap: {
-          snapTo: 1 / (specialties.length - 1),
-          duration: 0.2,
-          delay: 0,
-        }
-      }
-    });
+    // DESKTOP: Side-by-side pinning
+    mm.add("(min-width: 1024px)", () => {
+      const itemsHeight = rightColumnRef.current.clientHeight;
+      const scrollDistance = itemsHeight - 400; 
 
-    itemsRef.current.forEach((item) => {
-      gsap.from(item, {
+      gsap.to(rightColumnRef.current, {
+        y: -scrollDistance,
+        ease: "none",
         scrollTrigger: {
-          trigger: item,
-          start: 'top 50%',
-          end: 'bottom 50%',
-          toggleClass: { targets: item, className: 'active-card-glow' },
-          containerAnimation: null // This is for local triggers within the pinned container
+          trigger: containerRef.current,
+          start: "top top",
+          end: `+=${itemsHeight}`,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          snap: 1 / (specialties.length - 1)
         }
       });
     });
+
+    // MOBILE: Stacked cards with fade-in
+    mm.add("(max-width: 1023px)", () => {
+      itemsRef.current.forEach((item) => {
+        gsap.from(item, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      });
+    });
+
+    return () => mm.revert();
   }, { scope: containerRef });
 
   return (
     <section 
       ref={containerRef} 
-      className="bg-white text-stone-900 min-h-screen flex items-center overflow-hidden font-[Inter]"
+      className="bg-white text-stone-900 min-h-screen lg:flex items-center overflow-hidden font-[Inter] py-20 lg:py-0"
     >
-      <div className="max-w-7xl mx-auto w-full px-8 flex relative h-[400px]">
-        {/* Left Column - Fixed */}
-        <div className="w-1/2 flex items-center">
+      <div className="max-w-7xl mx-auto w-full px-8 flex flex-col lg:flex-row relative lg:h-[400px] gap-20 lg:gap-0">
+        {/* Left Column - Fixed on Desktop, Stacked on Mobile */}
+        <div className="w-full lg:w-1/2 flex items-center lg:pr-10">
           <div className="max-w-md">
             <div className="h-1.5 w-24 bg-primary mb-8"></div>
-            <h2 className="text-6xl font-black tracking-tight leading-tight">
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tight leading-tight">
               Crafting Your<br/>
               <span className="text-primary uppercase tracking-tighter">Next Chapter</span>
             </h2>
@@ -74,24 +80,24 @@ export default function VerticalJourney() {
           </div>
         </div>
 
-        {/* Right Column - Scrolling */}
-        <div className="w-1/2 relative">
+        {/* Right Column - Scrolling on Desktop, Static Stack on Mobile */}
+        <div className="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-0">
           <div 
             ref={rightColumnRef} 
-            className="absolute top-0 right-0 w-full flex flex-col gap-10"
+            className="lg:absolute top-0 right-0 w-full flex flex-col gap-10"
           >
             {specialties.map((item, index) => (
               <div 
                 key={item.id}
                 ref={el => itemsRef.current[index] = el}
-                className="vertical-journey-item p-10 bg-stone-50 border-4 border-stone-100 rounded-3xl min-h-[360px] flex flex-col justify-between"
+                className="vertical-journey-item p-6 lg:p-10 bg-stone-50 border-4 border-stone-100 rounded-3xl min-h-[320px] lg:min-h-[360px] flex flex-col justify-between shadow-sm"
               >
                 <div className="flex justify-between items-start">
                   <span className="material-symbols-outlined text-5xl text-primary">{item.icon}</span>
-                  <span className="text-6xl font-black text-stone-200 tracking-tighter">{item.id}</span>
+                  <span className="text-4xl lg:text-6xl font-black text-stone-200/60 dark:text-stone-800/50 tracking-tighter">{item.id}</span>
                 </div>
                 <div>
-                  <h3 className="text-4xl font-black mb-4">{item.name}</h3>
+                  <h3 className="text-3xl lg:text-4xl font-black mb-4">{item.name}</h3>
                   <p className="text-stone-500 text-lg leading-relaxed">{item.desc}</p>
                 </div>
               </div>

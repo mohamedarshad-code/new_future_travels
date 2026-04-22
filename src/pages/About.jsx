@@ -1,5 +1,6 @@
 import AboutSection from '../components/AboutSection';
-import { CompanyValues, Milestones } from '../components/AboutPageSections';
+import { CompanyValues } from '../components/AboutPageSections';
+import PassportTimeline from '../components/PassportTimeline';
 import CTABanner from '../components/CTABanner';
 import useGsapAnimations from '../hooks/useGsapAnimations';
 import { useRef } from 'react';
@@ -15,7 +16,7 @@ export default function About() {
       </div>
       <AboutSection />
       <div className="gsap-reveal"><CompanyValues /></div>
-      <div className="gsap-reveal"><Milestones /></div>
+      <PassportTimeline />
       <div className="gsap-reveal"><CTABanner /></div>
     </div>
   );

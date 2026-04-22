@@ -10,12 +10,13 @@ export default function Testimonials() {
 
   return (
     <div ref={mainRef}>
-      <div className="pt-24 pb-12 text-center bg-surface gsap-reveal">
+      <div className="pt-24 pb-12 text-center bg-surface">
         <h1 className="text-5xl font-black">Client Stories</h1>
       </div>
-      <div className="gsap-reveal"><TestimonialsSection /></div>
+      <TestimonialsSection />
       <div className="gsap-reveal"><PartnerSpotlight /></div>
       <div className="gsap-reveal"><CTABanner /></div>
     </div>
   );
 }
+

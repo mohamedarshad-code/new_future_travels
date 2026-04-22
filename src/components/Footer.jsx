@@ -1,61 +1,90 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/images/logo.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-100 dark:bg-stone-950 full-width py-20 font-[Inter] text-sm text-stone-600 dark:text-stone-400 tonal-shift-bg">
-      <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="space-y-6">
-          <h3 className="text-xl font-black text-stone-900 dark:text-stone-50">New Future Travels</h3>
-          <p className="leading-relaxed">Designing the world’s most inspiring journeys for travelers who seek depth, detail, and discovery.</p>
-          <div className="flex gap-4">
-            <div className="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center"><span className="material-symbols-outlined text-xs">share</span></div>
-            <div className="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center"><span className="material-symbols-outlined text-xs">favorite</span></div>
-            <div className="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center"><span className="material-symbols-outlined text-xs">camera</span></div>
+    <footer className="bg-[#F4F4EF] py-24 lg:py-32 overflow-hidden border-t border-[#14140F]/5">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
+          
+          {/* Brand */}
+          <div className="reveal">
+            <Link to="/" className="inline-block mb-8">
+              <img src={logo} alt="New Future Travels" className="h-12 w-auto" />
+            </Link>
+            <p className="text-sm text-[#14140F]/60 leading-relaxed max-w-xs">
+              Designing the world’s most inspiring journeys for travelers who seek depth, detail, and discovery.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="reveal reveal-delay-1">
+            <p className="text-[#14140F]/30 text-[10px] tracking-[0.2em] uppercase mb-8">Navigation</p>
+            <ul className="space-y-4">
+              {['Home', 'About', 'Services', 'Stories', 'Contact'].map(link => (
+                <li key={link}>
+                  <Link to={link === 'Home' ? '/' : `/${link.toLowerCase()}`} className="text-sm text-[#14140F] hover:text-[#436900] transition-colors">
+                    {link}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="reveal reveal-delay-2">
+            <p className="text-[#14140F]/30 text-[10px] tracking-[0.2em] uppercase mb-8">Contact Terminal</p>
+            <ul className="space-y-6">
+              <li className="flex gap-4">
+                <span className="material-symbols-outlined text-[#436900] text-lg">location_on</span>
+                <p className="text-sm text-[#14140F] leading-relaxed">
+                  1776, Trichy Road, Coimbatore,<br />Tamil Nadu 641045
+                </p>
+              </li>
+              <li className="flex gap-4 text-sm text-[#14140F]">
+                <span className="material-symbols-outlined text-[#436900] text-lg">call</span>
+                +91 98436 98394
+              </li>
+              <li className="flex gap-4 text-sm text-[#14140F]">
+                <span className="material-symbols-outlined text-[#436900] text-lg">mail</span>
+                info@newfuturetravels.com
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div className="reveal reveal-delay-3">
+            <p className="text-[#14140F]/30 text-[10px] tracking-[0.2em] uppercase mb-8">Newsletter</p>
+            <p className="text-sm text-[#14140F]/60 mb-8 leading-relaxed">
+              Join our list for exclusive early bird packages and travel insights.
+            </p>
+            <div className="flex bg-white rounded-full p-1.5 border border-[#14140F]/5">
+              <input 
+                className="bg-transparent border-none focus:ring-0 w-full text-xs text-[#14140F] outline-none px-6" 
+                placeholder="Your email address" 
+                type="email" 
+              />
+              <button className="bg-[#436900] text-white px-6 py-3 rounded-full text-[10px] font-medium tracking-widest uppercase hover:bg-[#324e00] transition-colors">
+                Join
+              </button>
+            </div>
           </div>
         </div>
-        <div className="space-y-6">
-          <h4 className="text-stone-900 dark:text-stone-50 font-bold uppercase tracking-widest text-xs">Quick Links</h4>
-          <ul className="space-y-4">
-            <li><Link className="hover:translate-x-1 transition-transform inline-block" to="/">Home</Link></li>
-            <li><Link className="hover:translate-x-1 transition-transform inline-block" to="/about">About Us</Link></li>
-            <li><Link className="hover:translate-x-1 transition-transform inline-block" to="/services">Our Services</Link></li>
-            <li><Link className="hover:translate-x-1 transition-transform inline-block" to="/contact">Travel Insurance</Link></li>
-          </ul>
-        </div>
-        <div className="space-y-6">
-          <h4 className="text-stone-900 dark:text-stone-50 font-bold uppercase tracking-widest text-xs">Office</h4>
-          <ul className="space-y-4">
-            <li className="flex gap-3">
-              <span className="material-symbols-outlined text-primary text-sm pt-1">location_on</span>
-              <p>Office No.6, First Floor, 1776, Trichy Road, Olymbus, Ramanathapuram,<br />Coimbatore,<br />Tamil Nadu 641045</p>
-            </li>
-            <li className="flex gap-3">
-              <span className="material-symbols-outlined text-primary text-sm pt-1">call</span>
-              <p>+91 98436 98394</p>
-            </li>
-            <li className="flex gap-3">
-              <span className="material-symbols-outlined text-primary text-sm pt-1">mail</span>
-              <p>info@newfuturetravels.com</p>
-            </li>
-          </ul>
-        </div>
-        <div className="space-y-6">
-          <h4 className="text-stone-900 dark:text-stone-50 font-bold uppercase tracking-widest text-xs">Newsletter</h4>
-          <p>Join the Wayfarer’s Club for exclusive travel insights and early bird packages.</p>
-          <div className="flex bg-white rounded-lg p-1 border border-stone-100">
-            <input className="bg-transparent border-none focus:ring-0 w-full text-xs text-stone-900 outline-none px-4" placeholder="Email" type="email" />
-            <button className="bg-primary text-white px-6 py-2 rounded-md font-bold">Go</button>
+
+        <div className="mt-24 pt-12 border-t border-[#14140F]/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[10px] font-medium tracking-widest uppercase text-[#14140F]/30">
+            © 2026 New Future Travels · The Modern Wayfarer
+          </p>
+          <div className="flex gap-10">
+            {['Privacy', 'Terms', 'Sustainability'].map(l => (
+              <a key={l} href="#" className="text-[10px] font-medium tracking-widest uppercase text-[#14140F]/30 hover:text-[#14140F] transition-colors">
+                {l}
+              </a>
+            ))}
           </div>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-8 mt-20 pt-10 border-t border-stone-200 dark:border-stone-800 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p>© 2026 New Future Travels. The Modern Wayfarer.</p>
-        <div className="flex gap-8">
-          <a className="hover:text-stone-900" href="#">Privacy Policy</a>
-          <a className="hover:text-stone-900" href="#">Terms of Service</a>
-          <a className="hover:text-stone-900" href="#">Sustainability</a>
         </div>
       </div>
     </footer>
   );
 }
+

@@ -9,7 +9,7 @@ export default function Services() {
 
   return (
     <div ref={mainRef}>
-      <div className="pt-24 pb-12 text-center bg-surface gsap-reveal">
+      <div className="pt-24 pb-12 text-center bg-surface">
         <h1 className="text-5xl font-black">Our Services</h1>
       </div>
       <ServicesSection />

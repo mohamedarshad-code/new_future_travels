@@ -1,0 +1,47 @@
+local_backend: true
+backend:
+  name: git-gateway
+  branch: main # Change this to your default branch
+
+media_folder: "public/assets/images" # Folder where images will be stored
+public_folder: "/assets/images" # The src attribute of images in the HTML
+
+collections:
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "src/data/testimonials"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    fields:
+      - { label: "Client Name", name: "name", widget: "string" }
+      - { label: "Title/Role", name: "title", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Quote", name: "text", widget: "text" }
+      - { label: "Avatar Image", name: "avatar", widget: "image" }
+
+  - name: "services"
+    label: "Services"
+    folder: "src/data/services"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    fields:
+      - { label: "Service Title", name: "title", widget: "string" }
+      - { label: "Icon Name", name: "icon", widget: "string", hint: "Material Symbol name (e.g. flight, diamond, verified_user)" }
+      - { label: "Description", name: "desc", widget: "text" }
+
+  - name: "about"
+    label: "About Section"
+    files:
+      - label: "Founder Details"
+        name: "founder"
+        file: "src/data/about.json"
+        fields:
+          - { label: "Name", name: "founderName", widget: "string" }
+          - { label: "Role", name: "founderRole", widget: "string" }
+          - { label: "Founded Year", name: "foundedYear", widget: "string" }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Biography", name: "bio", widget: "text" }
+          - { label: "Quote", name: "quote", widget: "string" }
+          - { label: "Founder Photo", name: "founderImage", widget: "image" }

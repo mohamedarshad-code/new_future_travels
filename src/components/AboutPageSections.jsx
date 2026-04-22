@@ -6,10 +6,10 @@ export function CompanyValues() {
   ];
 
   return (
-    <section className="py-32 bg-stone-50">
+    <section className="py-20 lg:py-32 bg-stone-50">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
         {values.map((v, i) => (
-          <div key={i} className="p-10 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all h-full">
+          <div key={i} className="p-8 lg:p-10 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all h-full">
             <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8">
               <span className="material-symbols-outlined text-4xl text-primary">{v.icon}</span>
             </div>
@@ -31,16 +31,16 @@ export function Milestones() {
   ];
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-8 text-center">
-        <h2 className="text-5xl font-black tracking-tight mb-20 leading-tight">Our Legacy Timeline</h2>
+        <h2 className="text-4xl lg:text-5xl font-black tracking-tight mb-12 lg:mb-20 leading-tight">Our Legacy Timeline</h2>
         <div className="relative">
           <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-stone-100 hidden md:block"></div>
           <div className="space-y-12">
             {years.map((y, i) => (
               <div key={i} className={`flex flex-col md:flex-row items-center gap-12 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                 <div className="flex-1 text-center md:text-left">
-                  <span className="text-primary font-black text-4xl block mb-2">{y.year}</span>
+                  <span className="text-primary font-black text-3xl lg:text-4xl block mb-2">{y.year}</span>
                   <h4 className="text-2xl font-bold mb-4">{y.title}</h4>
                   <p className="text-on-surface-variant max-w-sm mx-auto md:mx-0">{y.desc}</p>
                 </div>
